@@ -15,6 +15,14 @@ print_r($output);
 
 echo '<br>------------------<br>';
 
+$input = array(1,2,3,4,5);
+$num =  4;
+
+$output = moving($input, $num);
+print_r($output);
+
+echo '<br>------------------<br>';
+
 $input = array('a', 'b', 'c', 'd', 1, 2, 3);
 $num = 10;
 
@@ -28,48 +36,34 @@ function moving($input, $num){
 	
 	$count = count($input);
 	
-	$diff = $count - $num;
+	$new_array = $input;
 	
-	
-    for($i=0; $i<$count; $i++){
-        
-    	if($diff >= 0){    
-    	    
-    		$index = $i - ($num-1);
-    		
-    		if($index < 0){
-    			$newindex = $index+$count;
-    			$result[$i] = $input[$newindex];
-    		}else{
-    		    $newindex = $index;
-    			$result[$i] = $input[$newindex];
-    		}
-    		
-    		
-    	}else{ 
-    	    
-    	    $index = $i - ($num-1);
-    		
-    		if($index < 0){
-    		    $newindex = ($index+$count) - ($diff-2);
-    		    $result[$i] = $input[$newindex];
-    		    
-    		    if($newindex >= $count){ 
-    		        $newindex = $newindex - $diff;
-    		        $result[$i] = $input[$newindex-$num];
-    		    }
-    		    
-    		}else{
-    		    $newindex = $index;
-    			$result[$i] = $input[$newindex];
-    		}
-	    
-	    }
-	    
+	while(1){
+		if(count($new_array) < $num){
+			$new_array = array_merge($new_array, $input);
+		}else{
+			break;
+		}
 	}
+	
+	$new_array = array_slice($new_array, $num);
 
+	//print_r($new_array); exit;
+	
+	while(1){
+		if(count($new_array) < $count){
+			$new_array = array_merge($new_array, $input);
+		}else{
+			break;
+		}
+	}
+	
+	for($i=0; $i<$count; $i++){
+		
+		$result[$i] = $new_array[$i];
+		
+	}
+	
 	return $result;
 }
-
-
 
