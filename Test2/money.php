@@ -16,7 +16,6 @@
 <br><br>
 
 <?php
-
 function money_check($value, $money_value){
     if($value > $money_value){
         return floor($value/$money_value);
